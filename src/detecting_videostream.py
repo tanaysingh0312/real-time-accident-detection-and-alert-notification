@@ -1,8 +1,10 @@
 from ultralytics import YOLO
 import cv2
+import os # Added os import for path handling
 
 # Load a model
-model = YOLO("ML part/best.pt")
+# Assuming 'best.pt' is in the project root (../ from src/)
+model = YOLO("../best.pt")
 
 # Set the dimensions for captured frames
 frame_width = 640
@@ -27,7 +29,11 @@ while cap.isOpened():
     resized_frame = cv2.resize(frame, (frame_width, frame_height))
 
     # Save the resized frame as an image in a temporary directory
-    temp_image_path = "ML part/temp/temp.jpg"
+    # Path updated to a temp folder inside src
+    temp_dir = "../src/temp"
+    os.makedirs(temp_dir, exist_ok=True)
+    temp_image_path = os.path.join(temp_dir, "temp.jpg")
+    
     cv2.imwrite(temp_image_path, resized_frame)
 
     # Perform object detection on the image and show the results
