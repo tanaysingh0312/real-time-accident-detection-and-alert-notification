@@ -48,9 +48,9 @@ def iou(boxA, boxB):
 def send_email_alert():
     """Sends an email alert using hardcoded credentials."""
     # Hardcoded credentials as per user request
-    SENDER_EMAIL = "stanay657@gmail.com"
-    APP_PASSWORD = "zgceeztzobrzsury"
-    RECEIVER_EMAIL = "tanay.singh@spsu.ac.in"
+    SENDER_EMAIL = "example7@gmail.com"
+    APP_PASSWORD = "abfjosgorghog"
+    RECEIVER_EMAIL = "example@in"
 
     msg = EmailMessage()
     msg.set_content(
