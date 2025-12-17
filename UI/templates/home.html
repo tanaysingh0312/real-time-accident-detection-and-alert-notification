@@ -11,43 +11,80 @@
   </head>
   <body>
     <header>
-      <h1>Welcome to Accident Detection</h1>
+      <!-- Title updated to reflect accident detection focus (Step 7) -->
+      <h1>Accident Inference and Alerting System</h1>
       <p>Your Safety, Our Priority</p>
     </header>
     <section class="features">
       <div class="feature">
-        <img src="accident-icon.png" alt="Accident Icon" />
-        <h2>Real-time Detection</h2>
+        <!-- Placeholder for Accident Icon -->
+        <img
+          src="https://placehold.co/60x60/FF0000/fff?text=CRASH"
+          alt="Accident Icon"
+        />
+        <h2>Collision Inference</h2>
         <p>
-          Our advanced algorithms detect accidents in real-time, ensuring a
-          rapid response.
+          Detects accidents by analyzing object overlap (IOU) and proximity (Step 5).
         </p>
       </div>
       <div class="feature">
-        <img src="notification-icon.png" alt="Notification Icon" />
-        <h2>Instant Alerts</h2>
+        <!-- Placeholder for Notification Icon -->
+        <img
+          src="https://placehold.co/60x60/007bff/fff?text=ALERT"
+          alt="Notification Icon"
+        />
+        <h2>WhatsApp Alerting</h2>
         <p>
-          We notify emergency services and your loved ones immediately upon
-          detection.
+          Triggers an instant alert via Twilio WhatsApp upon accident detection (Step 9).
         </p>
       </div>
     </section>
 
     <p>
       <center>
-        Upload your file here to be detected and output be shown
+        Upload a traffic image to check for accident events.
         <br />
+        <!-- The form submits a POST request to '/' and uses the correct input name 'uploadedImage' -->
         <form method="POST" enctype="multipart/form-data">
-          <input type="file" name="uploadedImage" id="uploadedImage" />
-          <input type="submit" value="Upload" />
+          <input type="file" name="uploadedImage" id="uploadedImage" required />
+          <input type="submit" value="Analyze Image" />
         </form>
       </center>
     </p>
 
-    <footer>
-      <p>&copy; 2023 Accident Detection App</p>
-    </footer>
+    <!-- RESULT RENDERING SECTION (Displays status and results) -->
+    <section class="results-container" style="margin-top: 30px; padding: 20px; border-top: 1px solid #ccc;">
+      {% if message %}
+      <p style="font-size: 1.1em;"><b>Status: {{ message }}</b></p>
+      {% endif %}
 
-    <script src="{{ url_for('static', filename = 'scripts/index.js') }}"></script>
+      {% if result_image_url %}
+      <h3 style="margin-top: 20px;">Analyzed Image (Collision Area Highlighted in Red):</h3>
+      <!-- The result image is displayed here -->
+      <img
+        src="{{ result_image_url }}"
+        style="max-width: 100%; height: auto; border: 2px solid #333; margin-top: 10px; border-radius: 8px;"
+        alt="Image with accident inference"
+      />
+      {% endif %}
+
+      {% if detections %}
+      <h3 style="margin-top: 20px;">Relevant Detected Objects:</h3>
+      <ul style="list-style-type: none; padding: 0;">
+        {% for d in detections %}
+        <li
+          style="background-color: #e6f7ff; margin: 5px 0; padding: 10px; border-radius: 6px; border-left: 5px solid #007bff; font-family: monospace;"
+        >
+          {{ d }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </section>
+    <!-- -------------------------------------------------- -->
+
+    <footer>
+      <p>&copy; 2024 Accident Inference Prototype</p>
+    </footer>
   </body>
 </html>
