@@ -1,12 +1,15 @@
 from ultralytics import YOLO
 
 # Load a model
-model = YOLO("ML part/shub.pt")
+# Assuming 'best.pt' is in the project root (../ from src/)
+model = YOLO("../best.pt")
 
 # path variables
-save_path = "ML part/results/"
-image_path = "ML part/inputs/images/image3.jpg"
-video_path = "ML part/inputs/videos/video3.mp4"
+# Assuming results will be saved in a 'results' folder inside 'src' (../src/results/)
+save_path = "../src/results/" 
+# Paths for image/video updated to be relative to the current file (in src/) inside 'inputs' folder
+image_path = "inputs/images/image3.jpg"
+video_path = "inputs/videos/video3.mp4"
 
 # detection
 results = model.predict(source=image_path, project=save_path, save=True, show=True)
